@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa4bbd82-028f-4c2c-a585-ba31344dc1db" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CLIBasedDownloader" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CLIDownloader/Download.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CLIDownloader/Download.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/CLIDownloader/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CLIDownloader/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CLIDownloader/Threads.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CLIDownloader/Threads.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/CLIDownloader/VerifyURL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CLIDownloader/VerifyURL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/CLIDownloader/Download.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CLIDownloader/Download.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/CLIDownloader/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/CLIDownloader/VerifyURL.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/CLIDownloader/VerifyURL.class" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -98,6 +96,14 @@
       <option name="presentableId" value="Default" />
       <updated>1582766731471</updated>
     </task>
+    <task id="LOCAL-00001" summary="Final Commit">
+      <created>1582936292592</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1582936292592</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -111,12 +117,20 @@
       </map>
     </option>
   </component>
+  <component name="VcsManagerConfiguration">
+    <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
+    <MESSAGE value="Final Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Final Commit" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/CLIDownloader/Threads.java</url>
-          <line>67</line>
+          <line>62</line>
           <properties class="CLIDownloader.Threads" method="getHttpConnection">
             <option name="EMULATED" value="true" />
           </properties>

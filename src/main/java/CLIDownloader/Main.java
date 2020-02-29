@@ -3,6 +3,9 @@ package CLIDownloader;
 
 //import com.sun.xml.internal.ws.api.message.ExceptionHasMessage
 
+import java.io.IOException;
+import java.net.ConnectException;
+import java.net.MalformedURLException;
 import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.Instant;
@@ -12,8 +15,14 @@ import static java.lang.System.out;
 
 public class Main
 {
+    public static String myURL;
 
-    public static String mURL;
+    // Steps to successfully download a file
+    private static void printUsage(String[] args) {
+        System.out.println("Welcome to CLI Based File Downloader......... Correct usage is shown below");
+        System.err.println("\nUsage: java -jar ./IllumionCLIBasedDownloader-1.0-SNAPSHOT.jar  <URL> <number of threads>");
+        System.err.println();
+    }
     private static double joinTime;
     private static double downloadTime;
 
@@ -25,7 +34,7 @@ public class Main
             System.exit(0);
         }
 
-        mURL = args[0]; // Read the url from command line
+        myURL = args[0]; // Read the url from command line
 
         //Take number of threads as input from user
         int partsCount = Integer.parseInt(args[1]); // Number of threads used for multi-threading
@@ -39,15 +48,16 @@ public class Main
         // Creating an object which keeps track of the progress of our download
         ProgressBar progress = new ProgressBar();
 
+
         // Start new download with the given URL
-        Download newDownload = new Download(mURL, partsCount, progress);
+        Download newDownloaded = new Download(myURL, partsCount, progress);
 
         // Start the download.
         Instant start = Instant.now();
-        newDownload.startThread();
+        newDownloaded.startThread();
 
         // Verify the url inputted by the user
-        System.out.println("Sending HTTP request...");
+        System.out.println("Sending HTTP request................");
         synchronized (progress)
         {
             // verify the url user has inputted and wait till its verified or an expection occurs
@@ -66,8 +76,7 @@ public class Main
             else
             {
                 // Else print the error message and exit.
-                System.out.println("Exiting, error occurred");
-                //printErrorMessage(progress.ex);
+                printErrorMessage(progress.ex);
             }
         }
         System.out.println();
@@ -94,8 +103,7 @@ public class Main
             else
             {
                 // Else print the error message and exit.
-                //printErrorMessage(progress.ex);
-                System.out.println("Exiting, error occurred");
+                printErrorMessage(progress.ex);
             }
         }
 
@@ -125,14 +133,14 @@ public class Main
             else
             {
                 // Else print the error message and exit.
-                out.println("Exiting, error occurred");
+                printErrorMessage(progress.ex);
             }
         }
 
         // Wait for the main download thread to end.
         try
         {
-            newDownload.joinThread();
+            newDownloaded.joinThread();
         }
         catch (InterruptedException ex)
         {
@@ -145,12 +153,30 @@ public class Main
         System.out.print(new Timestamp(date.getTime()));
     }
 
-    // Steps to successfully download a file
-    private static void printUsage(String[] args) {
-        System.out.println("Welcome to CLI Based File Downloader......... Correct usage is shown below");
-        System.err.println("\nUsage: java -jar ./Illumio.jar <URL> <number of threads>");
-        System.err.println();
+    private static void printErrorMessage(Exception ex) {
+        /*
+         * Print the appropriate error message from the exception caught.
+         */
+        if (ex instanceof ConnectException) {
+            ConnectException connectException = (ConnectException) ex;
+            System.err.println("\nFailed to connect to the given URL: " + connectException.getMessage());
+            System.err.println("\nCheck your internet connection or URL again.");
+
+        } else if (ex instanceof MalformedURLException) {
+            System.err.println("Invalid URL: " + ex.getMessage());
+
+        } else if (ex instanceof IOException) {
+            System.err.println("\nFailed to open the output file: "
+                    + ex.getMessage());
+        } else if (ex instanceof InterruptedException) {
+            System.err.println("\nOne of the thread was interrupted: "
+                    + ex.getMessage());
+        }
+
+        /*
+         * Exit the program.
+         */
+        System.err.println("\nExiting!");
+        System.exit(0);
     }
-
-
 }
