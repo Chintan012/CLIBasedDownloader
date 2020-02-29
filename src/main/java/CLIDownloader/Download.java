@@ -40,6 +40,7 @@ public class Download implements Runnable
             // Connect to the created connection.
             conn.setRequestMethod("GET");
             conn.connect();
+            conn.setConnectTimeout(1000);
 
             // Check for the response code
             int responseCode = conn.getResponseCode();
@@ -56,30 +57,30 @@ public class Download implements Runnable
         }
     }
 
-    public ArrayList<Threads> downloadingThreads(URL url, long contentSize, int partCount, ProgressBar progress)
+    public ArrayList<Threads> downloadingThreads(URL url, long contentSize, int countParts, ProgressBar progress)
     {
-        long partSize = contentSize / partCount;
+        long sizeOfParts = contentSize / countParts;
 
-        ArrayList<Threads> downloadThreadsList = new ArrayList<>(partCount);
+        ArrayList<Threads> downloadThreadsList = new ArrayList<>(countParts);
 
-        for (int i = 0; i < partCount; i++)
+        for (int i = 0; i < countParts; i++)
         {
             // Calculate the begin and end byte for each part.
-            long beginByte = i * partSize;
-            long endByte;
-            if (i == partCount - 1)
+            long startingByte = i * sizeOfParts;
+            long endingByte;
+            if (i == countParts - 1)
             {
-                endByte = contentSize - 1;
+                endingByte = contentSize - 1;
             }
             else
             {
-                endByte = (i + 1) * partSize - 1;
+                endingByte = (i + 1) * sizeOfParts - 1;
             }
 
-            long currentPartSize = endByte - beginByte + 1;
+            long currentSizeOfParts = endingByte - startingByte + 1;
 
             // Create new download threads and start them.
-            Threads downloadThread = new Threads(url, beginByte, endByte, currentPartSize, i + 1, progress);
+            Threads downloadThread = new Threads(url, startingByte, endingByte, currentSizeOfParts, i + 1, progress);
             downloadThreadsList.add(downloadThread);
             downloadThreadsList.get(i).startDownload();
         }
@@ -92,9 +93,9 @@ public class Download implements Runnable
     {
         String outputFile =  fileName;
 
-        try (RandomAccessFile mainFile = new RandomAccessFile(outputFile, "rw"))
+        try (RandomAccessFile File = new RandomAccessFile(outputFile, "rw"))
         {
-            FileChannel mainChannel = mainFile.getChannel();
+            FileChannel Channel = File.getChannel();
             long startPosition = 0;
 
             for (int i = 0; i < listOfDownloadParts.size(); i++)
@@ -103,14 +104,14 @@ public class Download implements Runnable
 
                 try (RandomAccessFile partFile = new RandomAccessFile(partName, "rw"))
                 {
-                    long partSize = listOfDownloadParts.get(i).getDownloadedSize();
+                    long sizeOfParts = listOfDownloadParts.get(i).getDownloadedSize();
                     FileChannel partFileChannel = partFile.getChannel();
-                    long transferedBytes = mainChannel.transferFrom(partFileChannel,
-                            startPosition, partSize);
+                    long transferedBytes = Channel.transferFrom(partFileChannel,
+                            startPosition, sizeOfParts);
 
                     startPosition += transferedBytes;
 
-                    if (transferedBytes != partSize)
+                    if (transferedBytes != sizeOfParts)
                     {
                         throw new RuntimeException("Error joining file! At part: "
                                 + (i + 1));
@@ -166,8 +167,7 @@ public class Download implements Runnable
             myProgress.startDownloadTimeStamp = Instant.now();
 
             try {
-                listOfDownloadParts = downloadingThreads(url, contentSize,
-                        myParts, myProgress);
+                listOfDownloadParts = downloadingThreads(url, contentSize, myParts, myProgress);
             } catch (RuntimeException ex) {
                 throw ex;
             }

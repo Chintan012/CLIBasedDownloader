@@ -4,7 +4,16 @@
     <option name="GROUP_BY_SEVERITY" value="true" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa4bbd82-028f-4c2c-a585-ba31344dc1db" name="Default Changelist" comment="" />
+    <list default="true" id="aa4bbd82-028f-4c2c-a585-ba31344dc1db" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CLIBasedDownloader" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CLIDownloader/Download.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CLIDownloader/Download.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CLIDownloader/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CLIDownloader/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CLIDownloader/Threads.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CLIDownloader/Threads.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/CLIDownloader/VerifyURL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/CLIDownloader/VerifyURL.java" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,6 +30,9 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="MavenImportPreferences">
     <option name="importingSettings">
       <MavenImportingSettings>
@@ -33,8 +45,14 @@
   </component>
   <component name="ProjectId" id="1YMyPIzJHJDkwWXHhJW6cjaNPvy" />
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\MS\Illumio\src\main\java" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -52,7 +70,7 @@
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="CLIDownloader.Main" />
       <module name="IllumionCLIBasedDownloader" />
-      <option name="PROGRAM_PARAMETERS" value="http://ipv4.download.thinkbroadband.com/512MB.zip 8" />
+      <option name="PROGRAM_PARAMETERS" value="http://www.ubicomp.org/ubicomp2003/adjunct_proceedings/proceedings.pdf 16" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="CLIDownloader.*" />
@@ -82,12 +100,23 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/src/main/java/CLIDownloader/Threads.java</url>
-          <line>65</line>
+          <line>67</line>
           <properties class="CLIDownloader.Threads" method="getHttpConnection">
             <option name="EMULATED" value="true" />
           </properties>

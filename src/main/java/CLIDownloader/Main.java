@@ -1,14 +1,12 @@
 package CLIDownloader;
 
 
-import java.io.IOException;
-import java.net.ConnectException;
-import java.net.MalformedURLException;
+//import com.sun.xml.internal.ws.api.message.ExceptionHasMessage
+
 import java.sql.Timestamp;
-import java.util.Date;
 import java.time.Duration;
 import java.time.Instant;
-import java.util.Arrays;
+import java.util.Date;
 
 import static java.lang.System.out;
 
@@ -31,6 +29,12 @@ public class Main
 
         //Take number of threads as input from user
         int partsCount = Integer.parseInt(args[1]); // Number of threads used for multi-threading
+
+        int processors = Runtime.getRuntime().availableProcessors();
+        if (partsCount > (2 * processors)) {
+            out.println("Number of threads cannot exceed " + 2 * processors + " for optimal efficiency");
+            System.exit(0);
+        }
 
         // Creating an object which keeps track of the progress of our download
         ProgressBar progress = new ProgressBar();
@@ -62,7 +66,8 @@ public class Main
             else
             {
                 // Else print the error message and exit.
-                printErrorMessage(progress.ex);
+                System.out.println("Exiting, error occurred");
+                //printErrorMessage(progress.ex);
             }
         }
         System.out.println();
@@ -89,7 +94,8 @@ public class Main
             else
             {
                 // Else print the error message and exit.
-                printErrorMessage(progress.ex);
+                //printErrorMessage(progress.ex);
+                System.out.println("Exiting, error occurred");
             }
         }
 
@@ -119,7 +125,7 @@ public class Main
             else
             {
                 // Else print the error message and exit.
-                printErrorMessage(progress.ex);
+                out.println("Exiting, error occurred");
             }
         }
 
@@ -130,7 +136,7 @@ public class Main
         }
         catch (InterruptedException ex)
         {
-            printErrorMessage(ex);
+            System.out.println("Exiting, error occurred");
         }
 
         // Print the current time
@@ -146,38 +152,5 @@ public class Main
         System.err.println();
     }
 
-    /**
-     * Print the appropriate error message for the given exception.
-     *
-     * @param ex The exception whose message is to be printed.
-     */
-    private static void printErrorMessage(Exception ex) {
-        /*
-         * Print the appropriate error message from the exception caught.
-         */
-        if (ex instanceof MalformedURLException) {
-            System.err.println("\nInvalid URL: " + ex.getMessage());
-        } else if (ex instanceof ConnectException) {
-            ConnectException connectException = (ConnectException) ex;
-            System.err.println("\nFailed to connect to the given URL: "
-                    + connectException.getMessage());
-            System.err.println("\nCheck your internet connection or URL again.");
-        } else if (ex instanceof IOException) {
-            System.err.println("\nFailed to open the output file: "
-                    + ex.getMessage());
-        } else if (ex instanceof InterruptedException) {
-            System.err.println("\nOne of the thread was interrupted: "
-                    + ex.getMessage());
-        } else if (ex instanceof RuntimeException) {
-            System.err.println(Arrays.toString(ex.getStackTrace()));
-        }
 
-        /*
-         * Exit the program.
-         */
-        System.err.println("\nExiting!");
-        System.exit(0);
-    }
-
-    }
-
+}

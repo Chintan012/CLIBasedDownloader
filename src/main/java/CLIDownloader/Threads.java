@@ -1,10 +1,6 @@
 package CLIDownloader;
 
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.ByteBuffer;
@@ -26,6 +22,7 @@ public class Threads implements Runnable
     private final String myFileName;
 
     private final ProgressBar myProgress;
+
 
     //constructing a download object with url, start and end byte range for the downloads
     public Threads(URL url, long startByte, long endByte, long partSize, int part, ProgressBar progress)
@@ -66,11 +63,13 @@ public class Threads implements Runnable
     public HttpURLConnection getHttpConnection() throws IOException
     {
         // Connect to the URL
+
         HttpURLConnection conn = (HttpURLConnection) myURL.openConnection();
 
         String downloadRange = "bytes=" + myStartingByte + "-" + myEndingByte;
         conn.setRequestProperty("Range", downloadRange);
         conn.connect();
+        conn.setConnectTimeout(1000);
 
         // Return the connection.
         return conn;
